@@ -14,3 +14,4 @@ Ominaisuuksiin kuuluu esimerkiksi:
 - käyttäjä voi vastata yksittäisiin kommentteihin ketjussa
 - käyttäjä voi muokata ja poistaa viestejään
 - Lisäksi on erikseen ylläpitäjät, joilla lisäoikeuksia
+-
