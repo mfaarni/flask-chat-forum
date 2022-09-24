@@ -16,7 +16,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if not users.login(username, password):
-            return False
+            return render_template("error.html", message="virheelliset kirjautumissyötteet")
         session['username'] = username
         return redirect('/')
 
