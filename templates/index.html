@@ -2,17 +2,12 @@
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<form action="/login" method="POST">
-<p>Tunnus:<br>
-<input type="text" name="username"></p>
-<p>Salasana:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
+<p>
+    <a href="/login">Kirjaudu sisään</a>
+    käyttääksesi palvelua,</p>
+<p>tai 
+    <a href="/register">luo käyttäjä</a>
+    , jos olet täällä ensimmäistä kertaa
+</p>
 
-</form>
-
-<form action="/register" method="POST">
-<input type="submit" value="Rekisteröidy">
-
-</form>
 {% endif %}

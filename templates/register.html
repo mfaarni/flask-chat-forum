@@ -1,0 +1,12 @@
+{% block content %}
+
+<form action="/register" method="POST">
+<p>käyttäjänimi:
+<input type="text" name="username"></p>
+<p>salasana:
+<input type="password" name="password"></p>
+<input type="submit" value="Rekisteröidy">
+</form>
+<a href="/">Palaa takaisin</a>
+
+{% endblock %}

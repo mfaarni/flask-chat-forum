@@ -1,0 +1,13 @@
+{% block content %}
+
+<h2>Kirjaudu sisään</h2>
+<form action="/login" method="POST">
+<p>käyttäjänimi:
+<input type="text" name="username"></p>
+<p>salasana:
+<input type="password" name="password"></p>
+<input type="submit" value="Kirjaudu">
+</form>
+<a href="/">Palaa takaisin</a>
+
+{% endblock %}
