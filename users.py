@@ -14,8 +14,16 @@ def login(username, password):
             return True
         return False
 
-
 def register(username, password):
+    hash_value = generate_password_hash(password)
+    sql = 'insert into users (username, password) values (:username, :password)'
+    db.session.execute(
+        sql, {'username': username, 'password': hash_value}
+    )
+    db.session.commit()
+
+
+#def register(username, password):
     hash_value=generate_password_hash(password)
     sql = "SELECT id, password FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
