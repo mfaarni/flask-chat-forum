@@ -15,3 +15,6 @@ Ominaisuuksiin kuuluu esimerkiksi:
 - käyttäjä voi muokata ja poistaa viestejään
 - Lisäksi on erikseen ylläpitäjät, joilla lisäoikeuksia
 -
+
+
+Sovellusta voi testata [Herokussa](http://bestforum.herokuapp.com/)
