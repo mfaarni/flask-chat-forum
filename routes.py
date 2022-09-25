@@ -18,6 +18,7 @@ def login():
         if not users.login(username, password):
             return render_template("error.html", message="virheelliset kirjautumissyötteet")
         session['username'] = username
+        session["role"]=users.check_admin(username)
         return redirect('/')
 
 @app.route("/register",methods=["get", "post"])
@@ -28,7 +29,12 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        users.register(username, password)
+        role = request.form["role"]
+        users.register(username, password, role)
+        if users.login(username,password):
+            session['username'] = username
+            session["role"]=users.check_admin(username)
+
         return redirect("/")
 
 

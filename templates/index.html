@@ -1,13 +1,26 @@
-{% if session.username %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<p>
-    <a href="/login">Kirjaudu sisään</a>
-    käyttääksesi palvelua,</p>
-<p>tai 
-    <a href="/register">luo käyttäjä</a>
-    , jos olet täällä ensimmäistä kertaa
-</p>
+{% extends "layout.html" %} 
 
-{% endif %}
+{% block content %}
+
+{% if session.username %}
+{% if session.role %}
+    <p>Roolisi: {{session.role}}</p>
+
+    {% endif %}
+
+    <p>Olet kirjautunut nimellä {{ session.username}}, tervetuloa!</p>
+    <a href="/logout">Kirjaudu ulos</a>
+    {% else %}
+    <p>
+        <a href="/login">Kirjaudu sisään</a>
+        käyttääksesi palvelua,</p>
+    <p>tai 
+        <a href="/register">luo käyttäjä</a>
+        , jos olet täällä ensimmäistä kertaa
+    </p>
+
+    {% endif %}
+    
+    {% include "layout_snake.html" %} 
+    
+    {% endblock %}

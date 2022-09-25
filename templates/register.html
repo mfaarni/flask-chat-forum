@@ -1,12 +1,36 @@
+{% extends "layout.html" %} 
+
 {% block content %}
 
-<form action="/register" method="POST">
-<p>käyttäjänimi:
-<input type="text" name="username"></p>
-<p>salasana:
-<input type="password" name="password"></p>
-<input type="submit" value="Rekisteröidy">
-</form>
-<a href="/">Palaa takaisin</a>
 
+    <form action="/register" method="POST">
+    <fieldset>
+    <legend>Rekisteröityminen</legend>
+    <br>
+    käyttäjänimi
+    <input type="text" name="username"></p>
+    
+    salasana:
+    <input type="password" name="password"></p>
+    
+        <legend><b>valitse rooli:</b></legend>
+        <div>
+          <input type="radio" id="normal" name="role" value="normal"
+                 checked>
+          <label for="normal">normaali</label>
+        </div>
+        <div>
+          <input type="radio" id="admin" name="role" value="admin">
+          <label for="dewey">Moderaattori</label>
+        </div>
+    <br>
+    <input type="submit" value="Rekisteröidy">
+    <br>
+    <br>
+    </fieldset>
+    
+    </form>
+    <a href="/">Palaa takaisin</a>
+
+    {% include "layout_snake.html" %}
 {% endblock %}
