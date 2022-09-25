@@ -3,8 +3,14 @@ Harjoitustyö Helsingin yliopiston Tietokantasovellus-kurssille
 
 Sovellus on keskustelufoorumi, johon käyttäjät voivat kirjautua tunnuksilla ja jättää viestejä eri ketjuihin.
 
-Ominaisuuksiin kuuluu esimerkiksi:
-- Tunnusten luonti ja niiden avulla kirjautuminen
+
+Ominaisuudet tällä hekellä:
+- Käyttäjä voi rekisteröityä käyttäjätunnuksella ja salasanalla, jotka tallennetaan tietokantaan
+- Lisäksi tässä kohtaa valitaan rooli
+- Käyttäjä voi kirjautua sivulle rekisteröidyillä tunnuksilla
+- lisätty vähän visuaalista ilmettä huvin vuoksi :)
+
+Lisättäviä ominaisuuksia
 - eri keskustelualueet, joissa näkyy tietoa, kuten:
   - viestien määrä
   - viestien lähetysaika
@@ -13,8 +19,5 @@ Ominaisuuksiin kuuluu esimerkiksi:
 - käyttäjä voi vastata ketjuun tai luoda uuden
 - käyttäjä voi vastata yksittäisiin kommentteihin ketjussa
 - käyttäjä voi muokata ja poistaa viestejään
-- Lisäksi on erikseen ylläpitäjät, joilla lisäoikeuksia
--
 
-
-Sovellusta voi testata [Herokussa](http://bestforum.herokuapp.com/)
+Sovellus toimii [Herokussa](http://bestforum.herokuapp.com/)
