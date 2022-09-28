@@ -1,0 +1,27 @@
+{% extends "layout.html" %} 
+
+{% block content %}
+
+
+    <form action="/new_post" method="POST">
+    <fieldset>
+    <legend>uusi keskustelu</legend>
+    <br>
+    otsikko:
+    <input type="text" name="title"></p>
+    
+    teksti:
+    <br>
+    <textarea #id="text" name="content" rows="10" cols="80"></textarea>
+    <br><br><br>
+    <input type="submit" value="aloita keskustelu">
+    <input type="hidden" name=user_id value={{session.id}}>
+    <br>
+    <br>
+    </fieldset>
+    
+    </form>
+    <a href="/">Palaa takaisin</a>
+
+    {% include "layout_snake.html" %}
+{% endblock %}

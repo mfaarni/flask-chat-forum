@@ -15,12 +15,12 @@
     
         <legend><b>valitse rooli:</b></legend>
         <div>
-          <input type="radio" id="normal" name="role" value="normal"
+          <input type="radio" id="normal" name="role" value=0
                  checked>
           <label for="normal">normaali</label>
         </div>
         <div>
-          <input type="radio" id="admin" name="role" value="admin">
+          <input type="radio" id="admin" name="role" value=1>
           <label for="dewey">Moderaattori</label>
         </div>
     <br>
@@ -32,5 +32,4 @@
     </form>
     <a href="/">Palaa takaisin</a>
 
-    {% include "layout_snake.html" %}
 {% endblock %}
