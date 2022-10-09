@@ -1,0 +1,43 @@
+{% extends "layout.html" %} 
+
+{% block content %}
+<p2 style="color: rgb(45, 173, 13);font-size:38px;">{{ title[0] }}</p2>
+<br><br>
+<p2 style="color: rgb(141, 98, 4);font-size:22px;">{{ content[0] }}</p2>
+
+
+
+
+<br><hr><br>
+{% for comment in comments %}
+    {% if comment[2]%}
+        {{comment[1]}}
+        <br><br><hr><br>
+        
+
+
+    {% endif %}
+{% endfor %}
+
+
+
+<br><br><br>
+<form action="/new_comment" method="POST">
+    <fieldset>
+    <legend>Lisää kommentti: </legend>
+    <br>
+    <textarea #id="text" name="content" rows="10" cols="80"></textarea>
+    <br><br><br>
+   
+    <input type="submit" value="Lisää kommentti">
+    <input type="hidden" name=user_id value={{session.id}}>
+    <input type="hidden" name=post_id value={{post_id[0]}}>
+    <br>
+    <br>
+    </fieldset>
+    
+    </form>
+
+
+{% include "layout_snake.html" %}
+{% endblock %}

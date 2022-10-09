@@ -2,31 +2,49 @@
 
 
 {% block content %}
-
 {% if session.username %}
-<p>Tervetuloa, {{ session.username}}!</p>
-{% if session.role==1%}
-<p>Olet kirjautunut sisään ylläpitäjänä.</p>
+
+<p>Tervetuloa,  {{ session.username}}!{% if session.role==1%}       Olet kirjautunut sisään ylläpitäjänä.
 {% endif %}
+<br>
+<a href="/quote">Lisää itsellesi allekirjoitus</a>
+<br>
+<a href="/logout">Kirjaudu ulos</a>
+</p>
+<br><br>
+<a href="/new_post">Aloita uusi keskustelu</a>
+<br><br>
+
     <br><br><br>
     {% if all_posts %}
-    <p>Viestit:</p>
+    <p>Keskustelut:</p>
     <hr>
         {% for post in all_posts %}
-        <b style="color: rgb(68, 44, 0);font-size:22px;">{{ post[0] }}</b>
-        <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{ post[3] }}</p2>
-           <br><br>
-           
-           {{post[1]}}
-            <hr>
-            {% endfor %}
+            {% if post[4]%}
+                <a href="/post/{{post[0]}}" style="color :rgb(6, 177, 0); font-size:22px">{{post[1]}}</a>
+                <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{ post[5] }}</p2>
+                <br><br>
+                {{post[2]}}
+                <br>
+                
+                <br>
+                {% for quote in quotes%}
+                    {% if quote[1] == post[3]%}
+                    <i style="color: rgb(84, 69, 48);font-size:16px;">"{{ quote[0] }}" </i>
+                    {% endif %}
+                {% endfor %}
+
+                {% if session.role==1 or session.id==post[3]%}
+                    <form action="/delete_post" method="POST">
+                    <input type="hidden" name=post_id value={{post[0]}}>
+                    <input style="font: size 10px;" type="submit" value="Poista viesti">
+                    </form>
+                {% endif %}
+                <hr>  
+            {% endif %}
+        {% endfor %}
         {% endif %}
 
-    <br><br>
-    <a href="/new_post">Aloita uusi keskustelu</a>
-    <br><br>
-    
-    <a href="/logout">Kirjaudu ulos</a>
     {% else %}
     <p>
         <a href="/login">Kirjaudu sisään</a>
