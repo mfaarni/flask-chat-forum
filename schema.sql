@@ -26,7 +26,7 @@ post_id INTEGER,
 visibility BOOLEAN,
 created TIMESTAMP);
 
-CREATE TABLE quote 
+CREATE TABLE quotes
 (id SERIAL PRIMARY KEY,
 quote TEXT,
 user_id INTEGER);
