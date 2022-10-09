@@ -37,9 +37,9 @@ def register(username, password, role):
         sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)"
         db.session.execute(sql, {"username":username, "password":hash_value, "role":role})
         db.session.commit()
+        return login(username, password)
     else:
         return False
-    return login(username, password)
 
 
 def set_quote(user_id, new_content):
