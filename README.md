@@ -8,15 +8,11 @@ Ominaisuudet tällä hekellä:
 - Käyttäjä voi rekisteröityä käyttäjätunnuksella ja salasanalla, jotka tallennetaan tietokantaan
 - Lisäksi tässä kohtaa valitaan rooli
 - Käyttäjä voi kirjautua sivulle rekisteröidyillä tunnuksilla
-- lisätty vähän visuaalista ilmettä huvin vuoksi :)
+- Käyttäjä voi aloittaa uuden keskustelun tai avata olemassa olevan
+- Käyttäjä voi lisätä kommentteja keskusteluihin
+- Käyttäjä voi lisätä itselleen allekirjoituksen, joka näkyy hänen viestien alla (ei vielä kommenttien)
 
 Lisättäviä ominaisuuksia
-- eri keskustelualueet, joissa näkyy tietoa, kuten:
-  - viestien määrä
-  - viestien lähetysaika
-  - viestin lähettäjän käyttäjänimi
-  - mahdollisesti muuta
-- käyttäjä voi vastata ketjuun tai luoda uuden
 - käyttäjä voi vastata yksittäisiin kommentteihin ketjussa
 - käyttäjä voi muokata ja poistaa viestejään
 
