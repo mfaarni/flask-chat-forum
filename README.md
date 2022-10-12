@@ -16,4 +16,4 @@ Lisättäviä ominaisuuksia
 - käyttäjä voi vastata yksittäisiin kommentteihin ketjussa
 - käyttäjä voi muokata ja poistaa viestejään
 
-Sovellus toimii [Herokussa](http://bestforum.herokuapp.com/)
+Sovellus toimii [Herokussa](https://bestforum.herokuapp.com/)
