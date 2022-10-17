@@ -16,8 +16,18 @@
     <br><br><br>
     {% if session.quote %}
     <p>Allekirjoitus: {{session.quote}}</p>
-    {% endif %}
-    <input type="submit" value="aloita keskustelu">
+    {% endif %}        
+    
+    <legend><b>valitse rooli:</b></legend>
+
+        <select id="select_topics" name="select_topics">
+        {%for topic in topics%}
+            <option value={{topic}}>{{topic}}</option>
+        {%endfor%}
+          </select>
+        
+
+    <input type="submit" value="Aloita keskustelu">
     <input type="hidden" name=user_id value={{session.id}}>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <br>

@@ -1,18 +1,23 @@
 {% extends "layout.html" %} 
 
 {% block content %}
-<p2 style="color: rgb(45, 173, 13);font-size:38px;">{{ title[0] }}</p2>
+<p2 style="color: rgb(45, 173, 13);font-size:38px;">{{ post[1] }}</p2>
 <br><br>
-<p2 style="color: rgb(141, 98, 4);font-size:22px;">{{ content[0] }}</p2>
-
+<p2 style="color: rgb(141, 98, 4);font-size:22px;">{{ post[2] }}</p2>
+<br><br>
+<p2 style="color: rgb(100, 168, 180);font-size:16px;">{{ post[5] }}</p2>
 
 
 
 <br><hr><br>
 {% for comment in comments %}
     {% if comment[2]%}
-        {{comment[1]}}
-        <br><br><hr><br>
+           
+
+<p2 style="color: rgb(141, 98, 4);font-size:22px;">{{comment[1]}} </p2>
+<br><br>
+<p2 style="color: rgb(100, 168, 180);font-size:16px;">{{comment[5]}}</p2>
+        <br><hr><br>
         
 
 

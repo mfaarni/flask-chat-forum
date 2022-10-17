@@ -53,6 +53,28 @@ def get_content(post_id):
         return False
 
 
+def get_post(post_id):
+    try:
+        sql= "SELECT * FROM posts WHERE id=:id"
+        result=db.session.execute(sql, {"id":post_id})
+        message=result.fetchone()
+        return message
+    except:
+        return False
+
+
+
+
+def get_topics():
+    try:
+        sql= "SELECT id, topic FROM topics"
+        result=db.session.execute(sql)
+        message=result.fetchone()
+        return message
+    except:
+        return False
+
+
 
 
 

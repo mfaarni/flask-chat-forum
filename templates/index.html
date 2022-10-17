@@ -4,18 +4,21 @@
 {% block content %}
 {% if session.username %}
 
-<p>Tervetuloa,  {{ session.username}}!{% if session.role==1%}       Olet kirjautunut sisään ylläpitäjänä.
-{% endif %}
+<p style="color :rgb(6, 177, 0); font-size:28px">Tervetuloa, {{ session.username}}!</p>
+
+    {% if session.role==1%}
+        Olet kirjautunut sisään ylläpitäjänä.
+    {% endif %}
 <br>
 <a href="/quote">Lisää itsellesi allekirjoitus</a>
 <br>
-<a href="/logout">Kirjaudu ulos</a>
-</p>
-<br><br>
 <a href="/new_post">Aloita uusi keskustelu</a>
+<br>
+<a href="/logout">Kirjaudu ulos</a>
+
 <br><br>
 
-    <br><br><br>
+    <br><br>
     {% if all_posts %}
     <p>Keskustelut:</p>
     <hr>

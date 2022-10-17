@@ -16,7 +16,8 @@ title  TEXT,
 content TEXT, 
 user_id INTEGER, 
 visibility BOOLEAN,
-created TIMESTAMP);
+created TIMESTAMP,
+topic_id INTEGER);
 
 CREATE TABLE comments 
 (id SERIAL PRIMARY KEY, 
@@ -28,7 +29,7 @@ created TIMESTAMP);
 
 CREATE TABLE quotes
 (id SERIAL PRIMARY KEY,
-quote TEXT,
+content TEXT,
 user_id INTEGER);
 
 

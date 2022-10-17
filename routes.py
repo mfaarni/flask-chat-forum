@@ -59,10 +59,11 @@ def register():
 def new_post():
     if request.method == "GET":
         quote=users.get_quote()
+        topics=posts.get_topics()
         if quote:
-            return render_template("new_post.html", quote=quote)
+            return render_template("new_post.html", quote=quote, topics=topics)
         else:
-            return render_template("new_post.html")
+            return render_template("new_post.html", topics=topics)
 
         
     if request.method == "POST":
@@ -81,7 +82,8 @@ def post_page(post_id):
     title=posts.get_title(post_id)
     content=posts.get_content(post_id)
     comments=posts.get_comments(post_id)
-    return render_template("/post.html", title = title, content = content, comments= comments, post_id=post_id)
+    post=posts.get_post(post_id)
+    return render_template("/post.html", title = title, content = content, comments= comments, post=post, post_id=post_id)
 
 
 
