@@ -1,41 +1,32 @@
 {% extends "layout.html" %} 
-
 {% block content %}
 
-
-    <form action="/new_post" method="POST">
+  <form action="/new_post" method="POST">
     <fieldset>
-    <legend>uusi keskustelu</legend>
-    <br>
-    otsikko:
-    <input type="text" name="title"></p>
-    
-    teksti:
-    <br>
-    <textarea #id="text" name="content" rows="10" cols="80"></textarea>
-    <br><br><br>
-    {% if session.quote %}
-    <p>Allekirjoitus: {{session.quote}}</p>
-    {% endif %}        
-    
-    <legend><b>valitse kategoria:</b></legend>
-
-        <select id="topic" name="topic">
+      <legend>uusi keskustelu</legend>
+      <br>
+      otsikko:
+      <input type="text" name="title"></p> 
+      teksti:
+      <br>
+      <textarea #id="text" name="content" rows="10" cols="80"></textarea>
+      <br><br><br>
+      {% if session.quote %}
+        <p>Allekirjoitus: {{session.quote}}</p>
+      {% endif %}        
+      <legend><b>valitse kategoria:</b></legend>
+      <select id="topic" name="topic">
         {%for topic in topics%}
-            <option value={{topic[0]}}>{{topic[1]}}</option>  
+          <option value={{topic[0]}}>{{topic[1]}}</option>  
         {%endfor%}
-          </select>
-        
+      </select>
 
-    <input type="submit" value="Aloita keskustelu">
-    <input type="hidden" name=user_id value={{session.id}}>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    <br>
-    <br>
+      <input type="submit" value="Aloita keskustelu">
+      <input type="hidden" name=user_id value={{session.id}}>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <br><br>
     </fieldset>
-    
-    </form>
-    <a href="/">Palaa takaisin</a>
-
-    {% include "layout_snake.html" %}
+  </form>
+<a href="/">Palaa takaisin</a>
+{% include "layout_trees.html" %}
 {% endblock %}

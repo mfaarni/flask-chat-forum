@@ -1,7 +1,7 @@
 
-CREATE TABLE users 
+CREATE TABLE users
 (id SERIAL PRIMARY KEY,
-username TEXT UNIQUE, 
+username TEXT UNIQUE,
 password TEXT, 
 role INTEGER);
 
@@ -14,7 +14,7 @@ CREATE TABLE posts
 (id SERIAL PRIMARY KEY, 
 title  TEXT, 
 content TEXT, 
-user_id INTEGER, 
+user_id INTEGER REFERENCES users(id), 
 visibility BOOLEAN,
 created TIMESTAMP,
 topic_id INTEGER);
@@ -22,15 +22,12 @@ topic_id INTEGER);
 CREATE TABLE comments 
 (id SERIAL PRIMARY KEY, 
 content  TEXT, 
-user_id INTEGER, 
-post_id INTEGER,
+user_id INTEGER REFERENCES users(id), 
+post_id INTEGER REFERENCES posts(id),
 visibility BOOLEAN,
 created TIMESTAMP);
 
 CREATE TABLE quotes
 (id SERIAL PRIMARY KEY,
 content TEXT,
-user_id INTEGER);
-
-
-
+user_id INTEGER REFERENCES users(id));

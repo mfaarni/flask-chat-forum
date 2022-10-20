@@ -73,7 +73,6 @@ def new_post():
         else:
             return render_template("new_post.html", topics=topics)
 
-        
     if request.method == "POST":
         title = request.form["title"]
         content = request.form["content"]
@@ -195,7 +194,6 @@ def new_comment():
 
 @app.route("/logout")
 def logout():
-    users.check_csrf()
     del session["username"]
     return redirect("/")
 

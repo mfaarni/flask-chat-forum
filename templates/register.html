@@ -1,37 +1,33 @@
 {% extends "layout.html" %} 
-
 {% block content %}
 
-
-    <form action="/register" method="POST">
-    <fieldset>
+<form action="/register" method="POST">
+  <fieldset>
     <legend>Rekisteröityminen</legend>
     <br>
     Käyttäjänimi:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text" name="username"></p>
-    
+    <input type="text" name="username"></p>  
     Salasana:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="password" name="password"></p>
     Salasana uudelleen:
     <input type="password" name="password2"></p>
-        <legend><b>valitse rooli:</b></legend>
-        <div>
-          <br>
-          <input type="radio" id="normal" name="role" value=0
-                 checked>
-          <label for="normal">Normaali</label>
-        </div>
-        <div>
-          <input type="radio" id="admin" name="role" value=1>
-          <label for="dewey">Moderaattori</label>
-        </div>
+    <legend><b>valitse rooli:</b></legend>
+    <div>
+      <br>
+      <input type="radio" id="normal" name="role" value=0 checked>
+      <label for="normal">Normaali</label>
+    </div>
+    <div>
+      <input type="radio" id="admin" name="role" value=1>
+      <label for="dewey">Moderaattori</label>
+    </div>
     <br>
     <input type="submit" value="Rekisteröidy">
-    <br>
-    <br>
-    </fieldset>
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
-    <a href="/">Palaa takaisin</a>
+    <br><br>
+  </fieldset>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+<a href="/">Palaa takaisin</a>
 
+{% include "layout_trees.html" %} 
 {% endblock %}

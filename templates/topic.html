@@ -1,50 +1,44 @@
 {% extends "layout.html" %} 
-
-
 {% block content %}
+
 <a href="/">Etusivu</a>
+<br>
 {% for topic in topics %}
-<a href="/topic/{{topic[0]}}">{{topic[1]}}</a>
+  <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>
 {% endfor %}
+<hr>
+<p2 style="color: rgb(97, 66, 40);font-size:84px;">{{topic_name[0]}}</p2>
 <br>
 <a href="/new_post">Aloita uusi keskustelu</a>
-<hr>
+<br><br>
 
-<p2 style="color: rgb(97, 66, 40);font-size:84px;">{{topic_name[0]}}</p2>
-
-    <br><br>
-    {% if all_posts %}
-    <p>Keskustelut:</p>
-    <hr>  
-        {% for post in all_posts %}
-        {% if post[4]%}
-          {% if topic_id==post[6] %}
-                <a href="/post/{{post[0]}}" style="color :rgb(6, 177, 0); font-size:22px">{{post[1]}}</a>
-                <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{post[5]}}</p2>
-                <br><br>
-                {{post[2]}}
-                <br>
-                
-                <br>
-                {% for quote in quotes%}
-                    {% if quote[1] == post[3]%}
-                    <i style="color: rgb(84, 69, 48);font-size:16px;">"{{ quote[0] }}" </i>
-                    {% endif %}
-                {% endfor %}
-
-                {% if session.role==1 or session.id==post[3]%}
-                    <form action="/delete_post" method="POST">
-                    <input type="hidden" name=post_id value={{post[0]}}>
-                    <input style="font: size 10px;" type="submit" value="Poista viesti">
-                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-                    </form>
-                      {% endif %}     
-                      <hr>             
-                    {% endif %}
-
-            {% endif %}
+{% if all_posts %}
+  <p>Keskustelut:</p>
+  <hr>  
+  {% for post in all_posts %}
+    {% if post[4]%}
+      {% if topic_id==post[6] %}
+        <a href="/post/{{post[0]}}" style="color :rgb(6, 177, 0); font-size:22px">{{post[1]}}</a>
+        <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{post[5]}}</p2>
+        <br><br>
+        {{post[2]}}
+        <br><br>
+        {% for quote in quotes%}
+          {% if quote[1] == post[3]%}
+            <i style="color: rgb(84, 69, 48);font-size:16px;">"{{ quote[0] }}" </i>
+          {% endif %}
         {% endfor %}
-        {% endif %}
-
-    {% include "layout_snake.html" %} 
-    {% endblock %}
+        {% if session.role==1 or session.id==post[3]%} 
+          <form action="/delete_post" method="POST">
+            <input type="hidden" name=post_id value={{post[0]}}>
+            <input style="font: size 10px;" type="submit" value="Poista viesti">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          </form>
+        {% endif %}     
+        <hr>             
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% include "layout_trees.html" %} 
+{% endblock %}

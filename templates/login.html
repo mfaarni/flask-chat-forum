@@ -1,17 +1,16 @@
 {% extends "layout.html" %} 
-
 {% block content %}
 
 <h2>Kirjaudu sisään</h2>
 <form action="/login" method="POST">
-<p>käyttäjänimi:
-<input type="text" name="username"></p>
-<p>salasana:
-<input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <p>käyttäjänimi:
+  <input type="text" name="username"></p>
+  <p>salasana:
+  <input type="password" name="password"></p>
+  <input type="submit" value="Kirjaudu">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Palaa takaisin</a>
 
-{% include "layout_snake.html" %}
+{% include "layout_trees.html" %}
 {% endblock %}
