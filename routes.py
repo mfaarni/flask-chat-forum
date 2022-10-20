@@ -191,6 +191,17 @@ def new_comment():
         
         return redirect("/post/"+post_id)
 
+ 
+@app.route("/account", methods=["get", "post"])
+def account():
+    if request.method == "GET":
+        user_id=request.form["user_id"]
+        return render_template("account.html")
+
+    if request.method == "POST":
+        return render_template('account.html')
+
+
 
 @app.route("/logout")
 def logout():

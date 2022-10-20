@@ -1,7 +1,5 @@
 from db import db
 from datetime import datetime
-import users
-
 
 
 
@@ -9,6 +7,16 @@ def get_posts():
     try:
         sql= "SELECT id, title, content, user_id, visibility, created, topic_id FROM posts"
         result=db.session.execute(sql)
+        message=result.fetchall()
+        return message
+    except:
+        return False
+
+
+def get_posts_by_user(user_id):
+    try:
+        sql= "SELECT id, title, content, user_id, visibility, created, topic_id FROM posts WHERE user_id = user_id"
+        result=db.session.execute(sql, {"user_id":user_id})
         message=result.fetchall()
         return message
     except:
@@ -86,9 +94,6 @@ def get_topics():
         return False
 
 
-
-
-
 def get_comments(post_id):
     try:
         sql= "SELECT id, content, visibility, user_id, post_id, created FROM comments WHERE post_id=:post_id"
@@ -102,7 +107,7 @@ def get_comments(post_id):
 def get_all_comments():
     try:
 
-        sql= "SELECT post_id, count(post_id) FROM comments GROUP BY post_id"
+        sql= "SELECT post_id, count(post_id) FROM comments WHERE visibility = TRUE GROUP BY post_id"
         result=db.session.execute(sql)
         message=result.fetchall()
         return message
