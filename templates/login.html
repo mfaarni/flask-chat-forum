@@ -9,6 +9,7 @@
 <p>salasana:
 <input type="password" name="password"></p>
 <input type="submit" value="Kirjaudu">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <a href="/">Palaa takaisin</a>
 

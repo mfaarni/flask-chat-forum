@@ -3,7 +3,6 @@
 {% block content %}
 
 <h2>Virhe: {{message}}</h2>
-<a href="/">Palaa takaisin</a>
-
+<button onclick="history.back()">Palaa takaisin </button>
 {% include "layout_snake.html" %}
 {% endblock %}

@@ -7,19 +7,19 @@ import users
 
 def get_posts():
     try:
-        sql= "SELECT id, title, content, user_id, visibility, created FROM posts"
+        sql= "SELECT id, title, content, user_id, visibility, created, topic_id FROM posts"
         result=db.session.execute(sql)
         message=result.fetchall()
         return message
     except:
         return False
 
-def create_post(title, content, visibility, user_id):
+def create_post(title, content, visibility, user_id, topic_id):
 
         now=datetime.now()
         time=now.strftime("%d/%m/%Y %H:%M:%S")
-        sql= "INSERT INTO posts (title, content, user_id, visibility, created) VALUES (:title, :content, :user_id, :visibility, :created)"
-        db.session.execute(sql, {"title":title, "content":content, "user_id":user_id, "visibility":visibility, "created": time})
+        sql= "INSERT INTO posts (title, content, user_id, topic_id, visibility, created) VALUES (:title, :content, :user_id, :topic_id, :visibility, :created)"
+        db.session.execute(sql, {"title":title, "content":content, "user_id":user_id, "topic_id":topic_id, "visibility":visibility, "created": time})
         db.session.commit()
         return True
 
@@ -65,11 +65,22 @@ def get_post(post_id):
 
 
 
+def get_topic(topic_id):
+    try:
+        sql= "SELECT topic FROM topics where id=:id"
+        result=db.session.execute(sql, {"id":topic_id})
+        message=result.fetchone()
+        return message
+    except:
+        return False
+
+
+
 def get_topics():
     try:
-        sql= "SELECT id, topic FROM topics"
+        sql= "SELECT id, topic FROM topics ORDER BY topic DESC"
         result=db.session.execute(sql)
-        message=result.fetchone()
+        message=result.fetchall()
         return message
     except:
         return False
@@ -87,6 +98,17 @@ def get_comments(post_id):
     except:
         return False
 
+
+def get_all_comments():
+    try:
+
+        sql= "SELECT post_id, count(post_id) FROM comments GROUP BY post_id"
+        result=db.session.execute(sql)
+        message=result.fetchall()
+        return message
+    except:
+        return False
+
 def create_comment(content, visibility, user_id, post_id):
 
         now=datetime.now()
@@ -97,11 +119,28 @@ def create_comment(content, visibility, user_id, post_id):
         return True
 
 
+def create_topic(topic_name):
+
+        sql= "INSERT INTO topics (topic) VALUES (:topic)"
+        db.session.execute(sql, {"topic":topic_name})
+        db.session.commit()
+        return True
+
+
 def delete_comment(comment_id):
 
 
         sql= "UPDATE comments SET visibility=FALSE WHERE id=:id"
         db.session.execute(sql, {"id":comment_id})
+        db.session.commit()
+        return True
+
+
+def delete_topic(topic_id):
+
+
+        sql= "delete FROM topics WHERE id=:id"
+        db.session.execute(sql, {"id":topic_id})
         db.session.commit()
         return True
 

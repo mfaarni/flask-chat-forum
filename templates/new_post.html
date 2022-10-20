@@ -18,11 +18,11 @@
     <p>Allekirjoitus: {{session.quote}}</p>
     {% endif %}        
     
-    <legend><b>valitse rooli:</b></legend>
+    <legend><b>valitse kategoria:</b></legend>
 
-        <select id="select_topics" name="select_topics">
+        <select id="topic" name="topic">
         {%for topic in topics%}
-            <option value={{topic}}>{{topic}}</option>
+            <option value={{topic[0]}}>{{topic[1]}}</option>  
         {%endfor%}
           </select>
         

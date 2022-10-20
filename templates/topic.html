@@ -2,47 +2,25 @@
 
 
 {% block content %}
-
-{% if session.username %}
-
 <a href="/">Etusivu</a>
-<br>
 {% for topic in topics %}
 <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>
 {% endfor %}
-<br><br>
+<br>
 <a href="/new_post">Aloita uusi keskustelu</a>
 <hr>
-<p style="color :rgb(6, 177, 0); font-size:28px">Tervetuloa, {{ session.username}}!</p>
 
-    {% if session.role==1%}
-        Olet kirjautunut sisään ylläpitäjänä.
-    {% endif %}
-<br>
-<a href="/quote">Lisää itsellesi allekirjoitus</a>
-<br>
-<a href="/logout">Kirjaudu ulos</a>
-<br>
+<p2 style="color: rgb(97, 66, 40);font-size:84px;">{{topic_name[0]}}</p2>
 
-{% if session.role==1%}
-<a href="/edit_topics">Muokkaa keskusteluaiheita</a>
-{% endif %}
-<hr>
-
-<br><br>
     <br><br>
     {% if all_posts %}
     <p>Keskustelut:</p>
-    <hr>
+    <hr>  
         {% for post in all_posts %}
-            {% if post[4]%}
+        {% if post[4]%}
+          {% if topic_id==post[6] %}
                 <a href="/post/{{post[0]}}" style="color :rgb(6, 177, 0); font-size:22px">{{post[1]}}</a>
-                <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{ post[5] }}</p2>
-                  {%for post_comments in all_comments%}
-                    {%if post_comments[0]==post[0]%}
-                      Kommentteja:{{post_comments[1]}}
-                    {% endif %}
-                  {% endfor %}
+                <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{post[5]}}</p2>
                 <br><br>
                 {{post[2]}}
                 <br>
@@ -57,24 +35,16 @@
                 {% if session.role==1 or session.id==post[3]%}
                     <form action="/delete_post" method="POST">
                     <input type="hidden" name=post_id value={{post[0]}}>
-                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                     <input style="font: size 10px;" type="submit" value="Poista viesti">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                     </form>
-                {% endif %}
-                <hr>  
+                      {% endif %}     
+                      <hr>             
+                    {% endif %}
+
             {% endif %}
         {% endfor %}
         {% endif %}
 
-    {% else %}
-    <p>
-        <a href="/login">Kirjaudu sisään</a>
-        käyttääksesi palvelua,</p>
-    <p>tai 
-        <a href="/register">luo käyttäjä</a>
-        , jos olet täällä ensimmäistä kertaa
-    </p>
-
-    {% endif %}
     {% include "layout_snake.html" %} 
     {% endblock %}

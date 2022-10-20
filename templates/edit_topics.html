@@ -1,0 +1,33 @@
+{% extends "layout.html" %} 
+{% block content %}
+
+
+<form action="/create_topic" method="POST">
+    <fieldset>
+    <legend>Lisää keskusteluaihe: </legend>
+    <br>
+    <textarea #id="text" name="topic" rows="1" cols="40"></textarea>
+    <br><br><br>
+   
+    <input type="submit" value="Lisää aihe">
+    <br>
+    <br>
+    </fieldset>
+    
+    </form>
+<br>
+Aiheet:
+<br>
+<br>
+{%for topic in topics%}
+{{topic[1]}}<form action="/delete_topic" method="POST">
+    <input type="hidden" name=topic_id value={{topic[0]}}>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input style="font: size 10px;" type="submit" value="Poista aihe">
+    </form>
+<br>
+{%endfor%}
+
+
+{% include "layout_snake.html" %}
+{% endblock %}

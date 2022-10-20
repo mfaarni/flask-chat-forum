@@ -6,20 +6,33 @@
 <p2 style="color: rgb(141, 98, 4);font-size:22px;">{{ post[2] }}</p2>
 <br><br>
 <p2 style="color: rgb(100, 168, 180);font-size:16px;">{{ post[5] }}</p2>
+<br>
+{% for quote in quotes%}
+{% if quote[1] == post[3]%}
+<i style="color: rgb(84, 69, 48);font-size:16px;">"{{ quote[0] }}" </i>
+{% endif %}
+{% endfor %}
 
-
-
-<br><hr><br>
+<hr>
 {% for comment in comments %}
     {% if comment[2]%}
-           
+        <br>
 
 <p2 style="color: rgb(141, 98, 4);font-size:22px;">{{comment[1]}} </p2>
 <br><br>
 <p2 style="color: rgb(100, 168, 180);font-size:16px;">{{comment[5]}}</p2>
-        <br><hr><br>
         
 
+        {% if session.role==1 or session.id==post[3]%}
+            <br><br>
+            <form action="/delete_comment" method="POST">
+                <input type="hidden" name=comment_id value={{comment[0]}}>
+                <input type="hidden" name=post_id value={{post[0]}}>
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <input style="font: size 10px;" type="submit" value="Poista kommentti">
+            </form>
+        {% endif %}
+      <hr>
 
     {% endif %}
 {% endfor %}
@@ -37,6 +50,7 @@
     <input type="submit" value="Lisää kommentti">
     <input type="hidden" name=user_id value={{session.id}}>
     <input type="hidden" name=post_id value={{post_id[0]}}>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <br>
     <br>
     </fieldset>
