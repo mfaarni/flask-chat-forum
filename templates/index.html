@@ -1,41 +1,41 @@
 {% extends "layout.html" %} 
 {% block content %}
-
 {% if session.username %}
   <a href="/">Etusivu</a>
-
-
-
   <form method="POST" id="account" action="/account">
     <input type="hidden" name=user_id value={{session.id}}>
     <a href="#" onclick="document.getElementById('account').submit();"> Omat tiedot </a>
   </form>
+  <a href="/logout">Kirjaudu ulos</a>
+  <br>
   <br>
   {% for topic in topics %}
-    <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>
+    <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>&nbsp;&nbsp;
   {% endfor %}
+  <br>
   <a href="/post/{{random_post_id[0]}}">Satunnainen keskustelu</a>
-  <br><br>
-  <a href="/new_post">Aloita uusi keskustelu</a>
+  <br>
   <hr>
   <p style="color :rgb(6, 177, 0); font-size:28px">Tervetuloa, {{ session.username}}!</p>
   {% if session.role==1%}
     Olet kirjautunut sisään ylläpitäjänä.
   {% endif %}
-  <br>
-  <a href="/quote">Lisää itsellesi allekirjoitus</a>
-  <br>
-  <a href="/logout">Kirjaudu ulos</a>
-  <br>
   {% if session.role==1%}
     <a href="/edit_topics">Muokkaa keskusteluaiheita</a>
   {% endif %}
-  <hr><br><br><br><br>
+  <br><br>
+  <br>
+  <a href="/new_post">Aloita uusi keskustelu</a>
   {% if all_posts %}
     <p>Keskustelut:</p>
     <hr>
     {% for post in all_posts %}
-      {% if post[4]%}
+      <p style="font-size:16px;">{{post[7]}}</p>
+      {% for username in usernames %}
+        {%if post[3] == username[0]%}
+        <p style="color: rgb(45, 173, 13); display: inline">{{username[1]}}</p>
+        {%endif%}
+      {%endfor%}
         <a href="/post/{{post[0]}}" style="color :rgb(6, 177, 0); font-size:22px">{{post[1]}}</a>
         <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{ post[5] }}</p2>
         {%for post_comments in all_comments%}
@@ -57,9 +57,8 @@
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input style="font: size 10px;" type="submit" value="Poista viesti">
           </form>
-      {% endif %}
+        {% endif %}
       <hr>  
-    {% endif %}
   {% endfor %}
 {% endif %} 
 

@@ -10,8 +10,9 @@ def index():
     topics=posts.get_topics()
     all_comments=posts.get_all_comments()
     random_post_id=posts.get_random_post()
+    usernames = users.get_usernames()
     if all_posts!=False:
-        return render_template("index.html", all_posts=all_posts, quotes=quotes, topics=topics, all_comments=all_comments, random_post_id=random_post_id)
+        return render_template("index.html", all_posts=all_posts, quotes=quotes, topics=topics, all_comments=all_comments, random_post_id=random_post_id, usernames=usernames)
     else:
         return render_template("index.html")
 
@@ -81,19 +82,20 @@ def new_post():
 
         if len(title)==0 or len(content)==0 or title.isspace() or content.isspace():
             return render_template("error.html", message="Julkaisun ja sen otsikon täytyy sisältää tekstiä.")
-        if not posts.create_post(title, content, True, user_id, topic_id):
-            return render_template("error.html", message="Julkaisun luonti epäonnistui. Yritä myöhemmin uudelleen.")
-        
-        return redirect("/topic/"+topic_id)
-
+        post_id = posts.create_post(title, content, True, user_id, topic_id)
+        return redirect("/post/"+post_id)
+  
 @app.route("/post/<post_id>")
 def post_page(post_id):
     title=posts.get_title(post_id)
     content=posts.get_content(post_id)
     comments=posts.get_comments(post_id)
+    topics=posts.get_topics()
     post=posts.get_post(post_id)
     quotes=users.get_quotes()
-    return render_template("/post.html", title = title, content = content, quotes=quotes, comments= comments, post=post, post_id = post_id)
+    random_post_id=posts.get_random_post()
+    usernames = users.get_usernames()
+    return render_template("/post.html", title = title, content = content, quotes=quotes, topics=topics, comments= comments, post=post, post_id = post_id, random_post_id=random_post_id, usernames=usernames)
 
  
 @app.route("/topic/<topic_id>")
@@ -103,8 +105,10 @@ def topic(topic_id):
     topics=posts.get_topics()
     topic_id_int=int(topic_id)
     topic_name=posts.get_topic(topic_id)
+    random_post_id=posts.get_random_post()
+    usernames = users.get_usernames()
     if all_posts!=False:
-        return render_template("topic.html", all_posts=all_posts, quotes=quotes, topics=topics, topic_name=topic_name, topic_id=topic_id_int)
+        return render_template("topic.html", all_posts=all_posts, quotes=quotes, topics=topics, topic_name=topic_name, topic_id=topic_id_int, random_post_id=random_post_id, usernames=usernames)
     else:
         return render_template("topic.html")
 

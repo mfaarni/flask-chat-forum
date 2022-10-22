@@ -1,23 +1,39 @@
 {% extends "layout.html" %} 
 {% block content %}
-
 <a href="/">Etusivu</a>
+
+
+
+<form method="POST" id="account" action="/account">
+  <input type="hidden" name=user_id value={{session.id}}>
+  <a href="#" onclick="document.getElementById('account').submit();"> Omat tiedot </a>
+</form>
+<a href="/logout">Kirjaudu ulos</a>
+<br>
 <br>
 {% for topic in topics %}
-  <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>
+  <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>&nbsp;&nbsp;
 {% endfor %}
+<br>
+<a href="/post/{{random_post_id[0]}}">Satunnainen keskustelu</a>
+<br>
 <hr>
 <p2 style="color: rgb(97, 66, 40);font-size:84px;">{{topic_name[0]}}</p2>
 <br>
+<br>
 <a href="/new_post">Aloita uusi keskustelu</a>
-<br><br>
+<br>
 
 {% if all_posts %}
   <p>Keskustelut:</p>
   <hr>  
   {% for post in all_posts %}
-    {% if post[4]%}
-      {% if topic_id==post[6] %}
+    {% if topic_id==post[6] %}
+      {% for username in usernames %}
+        {%if post[3] == username[0]%}
+        <p style="color: rgb(45, 173, 13); display: inline">{{username[1]}}</p>
+        {%endif%}
+      {%endfor%}
         <a href="/post/{{post[0]}}" style="color :rgb(6, 177, 0); font-size:22px">{{post[1]}}</a>
         <p2 style="color: rgb(49, 190, 255);font-size:16px;">{{post[5]}}</p2>
         <br><br>
@@ -37,7 +53,6 @@
         {% endif %}     
         <hr>             
       {% endif %}
-    {% endif %}
   {% endfor %}
 {% endif %}
 {% include "layout_trees.html" %} 

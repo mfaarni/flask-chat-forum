@@ -63,6 +63,14 @@ def set_quote(user_id, new_content):
         return False
 
 
+def get_usernames():
+    try:
+        sql = '''SELECT id, username FROM users GROUP BY id'''
+        result = db.session.execute(sql)
+        message = result.fetchall()
+        return message
+    except:
+        return False
 def get_quote():
     try:
         user_id=session.id

@@ -1,6 +1,30 @@
 {% extends "layout.html" %} 
 {% block content %}
 
+<a href="/">Etusivu</a>
+
+
+
+<form method="POST" id="account" action="/account">
+  <input type="hidden" name=user_id value={{session.id}}>
+  <a href="#" onclick="document.getElementById('account').submit();"> Omat tiedot </a>
+</form>
+<a href="/logout">Kirjaudu ulos</a>
+<br>
+<br>
+{% for topic in topics %}
+  <a href="/topic/{{topic[0]}}">{{topic[1]}}</a>&nbsp;&nbsp;
+{% endfor %}
+<br>
+<a href="/post/{{random_post_id[0]}}">Satunnainen keskustelu</a>
+<br>
+<hr>
+
+{% for username in usernames %}
+  {%if post[3] == username[0]%}
+    <p style="color: rgb(45, 173, 13); display: inline">{{username[1]}}</p>
+  {%endif%}
+{%endfor%}
 <p2 style="color: rgb(45, 173, 13);font-size:38px;">{{ post[1] }}</p2>
 <br><br>
 <p2 style="color: rgb(141, 98, 4);font-size:22px;">{{ post[2] }}</p2>
@@ -16,6 +40,11 @@
 {% for comment in comments %}
   {% if comment[2]%}
     <br>
+    {% for username in usernames %}
+      {%if comment[3] == username[0]%}
+        <p style="color: rgb(45, 173, 13); display: inline">{{username[1]}}</p>
+      {%endif%}
+    {%endfor%}
     <p2 style="color: rgb(141, 98, 4);font-size:22px;">{{comment[1]}} </p2>
     <br><br>
     <p2 style="color: rgb(100, 168, 180);font-size:16px;">{{comment[5]}}</p2>
@@ -41,7 +70,7 @@
     <br><br><br>
     <input type="submit" value="Lisää kommentti">
     <input type="hidden" name=user_id value={{session.id}}>
-    <input type="hidden" name=post_id value={{post_id[0]}}>
+    <input type="hidden" name=post_id value={{post_id}}>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <br>
     <br>
