@@ -5,6 +5,7 @@
     <legend>Lisää keskusteluaihe: </legend>
     <br>
     <textarea #id="text" name="topic" rows="1" cols="40"></textarea>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <br><br><br> 
     <input type="submit" value="Lisää aihe">
     <br>
