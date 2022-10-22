@@ -41,7 +41,6 @@ def register():
         password = request.form["password"]
         password2 = request.form["password2"]
         role = request.form["role"]
-        users.check_csrf()
         if len(username)<3 or len(username)>14:
             return render_template("error.html", message="Käyttäjätunnuksen pitää olla 3-14 merkkiä pitkä.")
         if len(password)<3:
