@@ -16,7 +16,7 @@ title  TEXT,
 content TEXT, 
 user_id INTEGER REFERENCES users(id), 
 visibility BOOLEAN,
-created TIMESTAMP,
+created TIMESTAMPTZ DEFAULT Now(),
 topic_id INTEGER);
 
 CREATE TABLE comments 
@@ -25,7 +25,7 @@ content  TEXT,
 user_id INTEGER REFERENCES users(id), 
 post_id INTEGER REFERENCES posts(id),
 visibility BOOLEAN,
-created TIMESTAMP);
+created TIMESTAMPTZ DEFAULT Now());
 
 CREATE TABLE quotes
 (id SERIAL PRIMARY KEY,

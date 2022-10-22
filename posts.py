@@ -5,7 +5,7 @@ from datetime import datetime
 
 def get_posts():
     try:
-        sql= "SELECT id, title, content, user_id, visibility, created, topic_id FROM posts"
+        sql= "SELECT id, title, content, user_id, visibility, TO_CHAR(created, \'HH24:MI, Mon dd yyyy\'), topic_id FROM posts"
         result=db.session.execute(sql)
         message=result.fetchall()
         return message
@@ -15,7 +15,7 @@ def get_posts():
 
 def get_posts_by_user(user_id):
     try:
-        sql= "SELECT id, title, content, user_id, visibility, created, topic_id FROM posts WHERE user_id = user_id"
+        sql= "SELECT id, title, content, user_id, visibility, TO_CHAR(created, \'HH24:MI, Mon dd yyyy\'), topic_id FROM posts WHERE user_id = user_id"
         result=db.session.execute(sql, {"user_id":user_id})
         message=result.fetchall()
         return message
@@ -38,10 +38,8 @@ def get_text_avg_by_user(user_id):
         return message
 def create_post(title, content, visibility, user_id, topic_id):
 
-        now=datetime.now()
-        time=now.strftime("%d/%m/%Y %H:%M:%S")
-        sql= "INSERT INTO posts (title, content, user_id, topic_id, visibility, created) VALUES (:title, :content, :user_id, :topic_id, :visibility, :created)"
-        db.session.execute(sql, {"title":title, "content":content, "user_id":user_id, "topic_id":topic_id, "visibility":visibility, "created": time})
+        sql= "INSERT INTO posts (title, content, user_id, topic_id, visibility) VALUES (:title, :content, :user_id, :topic_id, :visibility)"
+        db.session.execute(sql, {"title":title, "content":content, "user_id":user_id, "topic_id":topic_id, "visibility":visibility})
         db.session.commit()
         return True
 
@@ -110,7 +108,7 @@ def get_topics():
 
 def get_comments(post_id):
     try:
-        sql= "SELECT id, content, visibility, user_id, post_id, created FROM comments WHERE post_id=:post_id"
+        sql= "SELECT id, content, visibility, user_id, post_id, TO_CHAR(created, \'HH24:MI, Mon dd yyyy\') FROM comments WHERE post_id=:post_id"
         result=db.session.execute(sql, {"post_id":post_id})
         message=result.fetchall()
         return message
@@ -130,10 +128,8 @@ def get_all_comments():
 
 def create_comment(content, visibility, user_id, post_id):
 
-        now=datetime.now()
-        time=now.strftime("%d/%m/%Y %H:%M:%S")
-        sql= "INSERT INTO comments (content, user_id, post_id, visibility, created) VALUES (:content, :user_id, :post_id, :visibility, :created)"
-        db.session.execute(sql, {"content":content, "user_id":user_id, "post_id":post_id, "visibility":visibility, "created": time})
+        sql= "INSERT INTO comments (content, user_id, post_id, visibility) VALUES (:content, :user_id, :post_id, :visibility)"
+        db.session.execute(sql, {"content":content, "user_id":user_id, "post_id":post_id, "visibility":visibility})
         db.session.commit()
         return True
 
