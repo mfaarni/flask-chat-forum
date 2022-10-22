@@ -1,6 +1,4 @@
 from db import db
-from datetime import datetime
-
 
 
 def get_posts():
@@ -35,7 +33,7 @@ def get_text_avg_by_user(user_id):
         sql= "SELECT ROUND(AVG(LENGTH(content)),0) FROM posts WHERE user_id = user_id"
         result=db.session.execute(sql, {"user_id":user_id})
         message=result.fetchone()
-        
+
         return message
 def create_post(title, content, visibility, user_id, topic_id):
 
@@ -76,7 +74,7 @@ def get_content(post_id):
 
 def get_post(post_id):
     try:
-        sql= "SELECT * FROM posts WHERE id=:id"
+        sql= "SELECT id, title, content, user_id, visibility, TO_CHAR(created, \'HH24:MI, Mon dd yyyy\'), topic_id FROM posts WHERE id=:id"
         result=db.session.execute(sql, {"id":post_id})
         message=result.fetchone()
         return message
