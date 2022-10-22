@@ -83,6 +83,17 @@ def get_post(post_id):
 
 
 
+def get_random_post():
+    try:
+        sql= "SELECT id FROM posts ORDER BY RANDOM() LIMIT 1"
+        result=db.session.execute(sql)
+        message=result.fetchone()
+        return message
+    except:
+        return False
+
+
+
 
 def get_topic(topic_id):
     try:

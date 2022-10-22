@@ -9,8 +9,9 @@ def index():
     quotes=users.get_quotes()
     topics=posts.get_topics()
     all_comments=posts.get_all_comments()
+    random_post_id=posts.get_random_post()
     if all_posts!=False:
-        return render_template("index.html", all_posts=all_posts, quotes=quotes, topics=topics, all_comments=all_comments)
+        return render_template("index.html", all_posts=all_posts, quotes=quotes, topics=topics, all_comments=all_comments, random_post_id=random_post_id)
     else:
         return render_template("index.html")
 
@@ -23,7 +24,6 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        users.check_csrf()
         if not users.login(username, password):
             return render_template("error.html", message="Käyttäjätunnusta ei löytynyt näillä arvoilla. Kokeile uudelleen tai rekisteröidy. ")
         else:
@@ -95,7 +95,6 @@ def post_page(post_id):
     post=posts.get_post(post_id)
     quotes=users.get_quotes()
     return render_template("/post.html", title = title, content = content, quotes=quotes, comments= comments, post=post, post_id = post_id)
-
 
  
 @app.route("/topic/<topic_id>")
