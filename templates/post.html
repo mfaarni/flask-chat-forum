@@ -27,7 +27,7 @@
 {%endfor%}
 <p2 style="color: rgb(45, 173, 13);font-size:38px;">{{ post[1] }}</p2>
 <br><br>
-<p2 style="color: rgb(141, 98, 4);font-size:22px;">{{ post[2] }}</p2>
+<p2 style="white-space: pre-line; color: rgb(141, 98, 4);font-size:22px;">{{ post[2] }}</p2>
 <br><br>
 <p2 style="color: rgb(100, 168, 180);font-size:16px;">{{ post[5] }}</p2>
 <br>
@@ -45,7 +45,7 @@
         <p style="color: rgb(45, 173, 13); display: inline">{{username[1]}}</p>
       {%endif%}
     {%endfor%}
-    <p2 style="color: rgb(141, 98, 4);font-size:22px;">{{comment[1]}} </p2>
+    <p2 style="white-space: pre-line; color: rgb(141, 98, 4);font-size:22px;">{{comment[1]}} </p2>
     <br><br>
     <p2 style="color: rgb(100, 168, 180);font-size:16px;">{{comment[5]}}</p2>
       {% if session.role==1 or session.id==post[3]%}

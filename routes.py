@@ -191,7 +191,7 @@ def new_comment():
         if not posts.create_comment(content, True, user_id, post_id):
             return render_template("error.html", message="Kommentin lisääminen epäonnistui.")
         
-        return redirect("/post/"+post_id)
+        return redirect("/post/"+post_id) 
 
  
 @app.route("/account", methods=["get", "post"])
