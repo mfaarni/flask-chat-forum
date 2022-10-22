@@ -22,6 +22,20 @@ def get_posts_by_user(user_id):
     except:
         return False
 
+def get_posts_count_by_user(user_id):
+    try:
+        sql= "SELECT count(id) FROM posts WHERE user_id = user_id"
+        result=db.session.execute(sql, {"user_id":user_id})
+        message=result.fetchall()
+        return message
+    except:
+        return False
+
+def get_text_avg_by_user(user_id):
+        sql= "SELECT ROUND(AVG(LENGTH(content)),0) FROM posts WHERE user_id = user_id"
+        result=db.session.execute(sql, {"user_id":user_id})
+        message=result.fetchone()
+        return message
 def create_post(title, content, visibility, user_id, topic_id):
 
         now=datetime.now()

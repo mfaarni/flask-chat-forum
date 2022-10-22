@@ -194,12 +194,15 @@ def new_comment():
  
 @app.route("/account", methods=["get", "post"])
 def account():
+    user_id=request.form["user_id"]
     if request.method == "GET":
-        user_id=request.form["user_id"]
         return render_template("account.html")
 
     if request.method == "POST":
-        return render_template('account.html')
+        user_quote = users.get_quote_id(user_id)
+        user_post_count = posts.get_posts_count_by_user(user_id)
+        text_avg = posts.get_text_avg_by_user(user_id)
+        return render_template('account.html', user_quote=user_quote, user_post_count=user_post_count, text_avg=text_avg)
 
 
 

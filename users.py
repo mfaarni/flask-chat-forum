@@ -74,6 +74,16 @@ def get_quote():
         return False
 
 
+def get_quote_id(user_id):
+    try:
+        sql= "SELECT content, user_id FROM quotes where user_id=:user_id"
+        result=db.session.execute(sql, {"user_id":user_id})
+        message=result.fetchall()
+        return message
+    except:
+        return False
+
+
 
 
 def get_quotes():

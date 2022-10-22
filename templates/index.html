@@ -6,9 +6,9 @@
 
 
 
-  <form method="get" id="account" action="/account">
+  <form method="POST" id="account" action="/account">
     <input type="hidden" name=user_id value={{session.id}}>
-    <a onClick="$('#account').submit(); return false;" href="/account">Omat tiedot</a>
+    <a href="#" onclick="document.getElementById('account').submit();"> Omat tiedot </a>
   </form>
   <br>
   {% for topic in topics %}
