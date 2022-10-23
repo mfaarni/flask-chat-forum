@@ -1,5 +1,5 @@
 from app import app
-import users, posts
+import users, posts, comments, topics
 from flask import render_template, request, redirect, session
 
 
@@ -7,12 +7,12 @@ from flask import render_template, request, redirect, session
 def index():
     all_posts= posts.get_posts()
     quotes=users.get_quotes()
-    topics=posts.get_topics()
-    all_comments=posts.get_all_comments()
+    all_topics=topics.get_topics()
+    all_comments=comments.get_all_comments()
     random_post_id=posts.get_random_post()
     usernames = users.get_usernames()
     if all_posts!=False:
-        return render_template("index.html", all_posts=all_posts, quotes=quotes, topics=topics, all_comments=all_comments, random_post_id=random_post_id, usernames=usernames)
+        return render_template("index.html", all_posts=all_posts, quotes=quotes, topics=all_topics, all_comments=all_comments, random_post_id=random_post_id, usernames=usernames)
     else:
         return render_template("index.html")
 
@@ -67,11 +67,11 @@ def register():
 def new_post():
     if request.method == "GET":
         quote=users.get_quote()
-        topics=posts.get_topics()
+        all_topics=topics.get_topics()
         if quote:
-            return render_template("new_post.html", quote=quote, topics=topics)
+            return render_template("new_post.html", quote=quote, topics=all_topics)
         else:
-            return render_template("new_post.html", topics=topics)
+            return render_template("new_post.html", topics=all_topics)
 
     if request.method == "POST":
         title = request.form["title"]
@@ -89,34 +89,34 @@ def new_post():
 def post_page(post_id):
     title=posts.get_title(post_id)
     content=posts.get_content(post_id)
-    comments=posts.get_comments(post_id)
-    topics=posts.get_topics()
+    all_comments=comments.get_comments(post_id)
+    all_topics=topics.get_topics()
     post=posts.get_post(post_id)
     quotes=users.get_quotes()
     random_post_id=posts.get_random_post()
     usernames = users.get_usernames()
-    return render_template("/post.html", title = title, content = content, quotes=quotes, topics=topics, comments= comments, post=post, post_id = post_id, random_post_id=random_post_id, usernames=usernames)
+    return render_template("/post.html", title = title, content = content, quotes=quotes, topics=all_topics, comments= all_comments, post=post, post_id = post_id, random_post_id=random_post_id, usernames=usernames)
 
  
 @app.route("/topic/<topic_id>")
 def topic(topic_id):
     all_posts= posts.get_posts()
     quotes=users.get_quotes()
-    topics=posts.get_topics()
+    all_topics=topics.get_topics()
     topic_id_int=int(topic_id)
-    topic_name=posts.get_topic(topic_id)
+    topic_name=topics.get_topic(topic_id)
     random_post_id=posts.get_random_post()
     usernames = users.get_usernames()
     if all_posts!=False:
-        return render_template("topic.html", all_posts=all_posts, quotes=quotes, topics=topics, topic_name=topic_name, topic_id=topic_id_int, random_post_id=random_post_id, usernames=usernames)
+        return render_template("topic.html", all_posts=all_posts, quotes=quotes, topics=all_topics, topic_name=topic_name, topic_id=topic_id_int, random_post_id=random_post_id, usernames=usernames)
     else:
         return render_template("topic.html")
 
  
 @app.route("/edit_topics")
 def edit_topics():
-    topics=posts.get_topics()
-    return render_template("edit_topics.html", topics=topics)
+    all_topics=topics.get_topics()
+    return render_template("edit_topics.html", topics=all_topics)
 
 
 @app.route("/delete_topic", methods= {"get", "post"})
@@ -124,7 +124,7 @@ def delete_topic():
     topic_id = request.form["topic_id"]
     users.check_csrf()
     try:
-        posts.delete_topic(topic_id)
+        topics.delete_topic(topic_id)
         return redirect("/edit_topics")
     except:
         return render_template("error.html")
@@ -135,7 +135,7 @@ def create_topic():
     topic_name= request.form["topic"]
     users.check_csrf()
     try:
-        posts.create_topic(topic_name)
+        topics.create_topic(topic_name)
         return redirect("/edit_topics")
     except:
         return render_template("error.html")
@@ -173,7 +173,7 @@ def delete_comment():
     post_id = request.form["post_id"]
     users.check_csrf()
     try:
-        posts.delete_comment(comment_id)
+        comments.delete_comment(comment_id)
     except:
         return render_template("error.html", message="Kommentin poisto epäonnistui. Yritä uudelleen.")
         
@@ -188,7 +188,7 @@ def new_comment():
         users.check_csrf()
         if not len(content)>0 or content.isspace():
             return render_template("error.html", message="Kommentti ei saa olla tyhjä. Yritä uudelleen syötteellä.")
-        if not posts.create_comment(content, True, user_id, post_id):
+        if not comments.create_comment(content, True, user_id, post_id):
             return render_template("error.html", message="Kommentin lisääminen epäonnistui.")
         
         return redirect("/post/"+post_id) 
