@@ -113,7 +113,7 @@ def get_random_post():
     try:
         sql= '''SELECT id 
                 FROM posts 
-                WHERE visibility = TRUE
+                WHERE visibility = TRUE AND topic_id IN (SELECT id FROM topics)
                 ORDER BY RANDOM() 
                 LIMIT 1'''
         result=db.session.execute(sql)
