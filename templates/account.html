@@ -5,7 +5,10 @@
 Hei, {{session.username}}!
 <br>
 {% if user_quote %}
-    Sinun allekirjoituksesi on {{user_quote[0][0]}}.
+    Sinun allekirjoituksesi on "{{user_quote[0][0]}}".
+    {%elif session.quote%}
+      Sinun allekirjoituksesi on "{{session.quote}}".
+
 {%else%}
     Sinulla ei ole allekirjoitusta.
 {%endif%}
